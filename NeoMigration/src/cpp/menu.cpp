@@ -10,24 +10,7 @@ namespace NeoMigration
 
 	
 
-	void runGame()
-	{
-		int screenWidth = 800;
-		int screenHeight = 600;
-		initPlayer(player);
-		initObstacle(obst1);
-		InitWindow(screenWidth, screenHeight, "Neo Migration");
-
-		while (!WindowShouldClose())
-		{
-			BeginDrawing();
-			ClearBackground(BLACK);
-			gameLoop();
-			gameVersion();
-			EndDrawing();
-		}
-		CloseWindow();
-	}
+	
 
 	bool checkCollisions(float r1x, float r1y, float r1w, float r1h, float r2x, float r2y, float r2w, float r2h)
 	{
@@ -56,5 +39,23 @@ namespace NeoMigration
 		DrawText("0.1", 750, 550, 20, WHITE);
 	}
 
+	void runGame()
+	{
+		int screenWidth = 800;
+		int screenHeight = 600;
+		initPlayer(player);
+		initObstacle(obst1);
+		InitWindow(screenWidth, screenHeight, "Neo Migration");
+
+		while (!WindowShouldClose())
+		{
+			BeginDrawing();
+			ClearBackground(BLACK);
+			gameLoop();
+			gameVersion();
+			EndDrawing();
+		}
+		CloseWindow();
+	}
 	
 }
