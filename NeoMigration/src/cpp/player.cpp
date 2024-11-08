@@ -13,8 +13,8 @@ namespace NeoMigration
 		player.speed = 0.0f;
 		player.pos.x = 50.0f;
 		player.pos.y = static_cast<float>((screenHeight / 2));
-		player.height = 20;
-		player.width = 20;
+		player.height = 40;
+		player.width = 40;
 			
 		
 		return player;
@@ -37,7 +37,16 @@ namespace NeoMigration
 		
 		if (IsKeyPressed(KEY_W))
 		{
-			player.pos.y -= 20.0f * GetFrameTime();
+			player.pos.y -= 20000.0f * GetFrameTime();
+		}
+		if (IsKeyPressed(KEY_S))
+		{
+			player.pos.y += 20000.0f * GetFrameTime();
+		}
+
+		if (player.pos.y >= GetScreenHeight())
+		{
+			resetPlayer(player);
 		}
 		return player;
 	}
@@ -46,4 +55,6 @@ namespace NeoMigration
 	{
 		DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.width, player.height, RED);
 	}
+
+	
 }

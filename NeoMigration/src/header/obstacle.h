@@ -6,6 +6,7 @@ namespace NeoMigration
 	struct Obstacle
 	{
 		Vector2 pos;
+		Vector2 initPos;
 		int height;
 		int width;
 		float speed;

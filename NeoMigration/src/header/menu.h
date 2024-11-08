@@ -8,5 +8,5 @@ namespace NeoMigration
 		Main = 0
 	};
 	void runGame();
-	void gameLoop();
+	
 }

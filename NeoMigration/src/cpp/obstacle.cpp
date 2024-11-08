@@ -10,20 +10,20 @@ namespace NeoMigration
 		int screenHeight = 600;
 		obstacle.speed = 0.0f;
 		obstacle.pos.x = static_cast<float>(screenWidth);
-		obstacle.pos.y = static_cast<float>(screenHeight / 2);
-		obstacle.width = 40;
-		obstacle.height = 60;
+		obstacle.initPos.x = obstacle.pos.x;
+		obstacle.pos.y = static_cast<float>((screenHeight / 2) +50);
+		obstacle.initPos.y = obstacle.pos.y;
+		obstacle.width = 60;
+		obstacle.height = screenWidth;
 
 		return obstacle;
 	}
 
 	Obstacle resetObstacle(Obstacle& obstacle)
 	{
-		int screenWidth = 800;
-		int screenHeight = 600;
 		obstacle.speed = 0.0f;
-		obstacle.pos.x = static_cast<float>(screenWidth);
-		obstacle.pos.y = static_cast<float>(screenHeight / 2);
+		obstacle.pos.x = obstacle.initPos.x;
+		obstacle.pos.y = obstacle.initPos.y;
 
 		return obstacle;
 	}
@@ -34,7 +34,7 @@ namespace NeoMigration
 
 		obstacle.pos.x -= obstacle.speed * GetFrameTime();
 
-		obstacle.speed += 5.0f * GetFrameTime();
+		obstacle.speed += 25.0f * GetFrameTime();
 
 		if (obstacle.pos.x <= 0)
 		{
