@@ -8,14 +8,14 @@ namespace NeoMigration
 	Player initPlayer(Player& player)
 	{
 		int screenHeight = 600;
-		player.gravity = 9.8f;
+		player.gravity = 200.0f;
 		player.score = 0;
 		player.speed = 0.0f;
 		player.pos.x = 50.0f;
 		player.pos.y = static_cast<float>((screenHeight / 2));
 		player.height = 40;
 		player.width = 40;
-			
+		player.jump = 100000.0f;
 		
 		return player;
 	}
@@ -35,19 +35,21 @@ namespace NeoMigration
 	{
 		drawPlayer(player);
 		
-		if (IsKeyPressed(KEY_W))
+		if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP))
 		{
-			player.pos.y -= 20000.0f * GetFrameTime();
+			player.pos.y -= player.jump * GetFrameTime();
+			if (player.pos.y <= 0)
+			{
+				player.pos.y = 0;
+			}
+			player.speed = 0.0f;
 		}
-		if (IsKeyPressed(KEY_S))
-		{
-			player.pos.y += 20000.0f * GetFrameTime();
-		}
+		
+		player.speed += player.gravity * GetFrameTime();
 
-		if (player.pos.y >= GetScreenHeight())
-		{
-			resetPlayer(player);
-		}
+		player.pos.y += player.speed * GetFrameTime();
+
+		
 		return player;
 	}
 

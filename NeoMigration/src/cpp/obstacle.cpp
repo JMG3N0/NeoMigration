@@ -9,6 +9,7 @@ namespace NeoMigration
 		int screenWidth = 800;
 		int screenHeight = 600;
 		obstacle.speed = 0.0f;
+		obstacle.speedCap = 600.f;
 		obstacle.pos.x = static_cast<float>(screenWidth);
 		obstacle.initPos.x = obstacle.pos.x;
 		obstacle.pos.y = static_cast<float>((screenHeight / 2) +50);
@@ -19,9 +20,13 @@ namespace NeoMigration
 		return obstacle;
 	}
 
-	Obstacle resetObstacle(Obstacle& obstacle)
+	Obstacle resetObstacle(Obstacle& obstacle, bool resetSpeed)
 	{
-		obstacle.speed = 0.0f;
+		if (resetSpeed == true)
+		{
+			obstacle.speed = 0.0f;
+		}
+		
 		obstacle.pos.x = obstacle.initPos.x;
 		obstacle.pos.y = obstacle.initPos.y;
 
@@ -32,13 +37,24 @@ namespace NeoMigration
 	{
 		drawObstacle(obstacle);
 
+
 		obstacle.pos.x -= obstacle.speed * GetFrameTime();
 
-		obstacle.speed += 25.0f * GetFrameTime();
+		if (obstacle.speed < obstacle.speedCap)
+		{
+
+			obstacle.speed += 50.0f * GetFrameTime();
+		}
+
+		if (obstacle.speed >= obstacle.speedCap)
+		{
+			obstacle.speed = obstacle.speedCap;
+		}
+		
 
 		if (obstacle.pos.x <= 0)
 		{
-			resetObstacle(obstacle);
+			resetObstacle(obstacle, false);
 		}
 
 		return obstacle;
@@ -46,6 +62,14 @@ namespace NeoMigration
 
 	void drawObstacle(Obstacle obstacle)
 	{
-		DrawRectangle(static_cast<int>(obstacle.pos.x), static_cast<int>(obstacle.pos.y), obstacle.width, obstacle.height, BLUE);
+		if (obstacle.speed >= obstacle.speedCap)
+		{
+			DrawRectangle(static_cast<int>(obstacle.pos.x), static_cast<int>(obstacle.pos.y), obstacle.width, obstacle.height, RED);
+		}
+		else
+		{
+			DrawRectangle(static_cast<int>(obstacle.pos.x), static_cast<int>(obstacle.pos.y), obstacle.width, obstacle.height, BLUE);
+		}
+		
 	}
 }

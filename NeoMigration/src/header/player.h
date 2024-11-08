@@ -11,6 +11,7 @@ namespace NeoMigration
 		int score;
 		float speed;
 		float gravity;
+		float jump;
 	};
 
 	Player initPlayer(Player& player);

@@ -20,6 +20,11 @@ namespace NeoMigration
 			r1y <= r2y + r2h) {    // r1 bottom edge past r2 top
 			return true;
 		}
+
+		if ((player.pos.y + player.height) >= GetScreenHeight())
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -30,7 +35,7 @@ namespace NeoMigration
 		if (checkCollisions(player.pos.x, player.pos.y, static_cast<float>(player.width), static_cast<float>(player.height), obst1.pos.x, obst1.pos.y, static_cast<float>(obst1.width), static_cast<float>(obst1.height)))
 		{
 			resetPlayer(player);
-			resetObstacle(obst1);
+			resetObstacle(obst1, true);
 		}
 	}
 
